@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowUpRight, Check, Cloud, Link2, LoaderCircle, RefreshCw, Search, ShieldCheck, Unplug } from "lucide-react";
+import { ArrowClockwise, ArrowUpRight, Check, Cloud, Link, MagnifyingGlass, PlugsConnected, ShieldCheck, SpinnerGap } from "@phosphor-icons/react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { api, timeAgo } from "@/lib/client";
@@ -96,9 +96,7 @@ export function IntegrationsCatalog() {
   const connected = new Map(data?.connections.map((item) => [item.toolkit.toLowerCase(), item]));
 
   return <div className="page">
-    <div className="eyebrow">Connected context</div>
-    <h1 className="page-title">Bring your company with you.</h1>
-    <p className="page-description">Connect the tools where work happens. Aperture imports read-only context and preserves threads, attachments, authors, folders, links, and versions.</p>
+    <div className="page-heading"><div><div className="eyebrow">Connected context · read only</div><h1 className="page-title">Bring the work <em>with you.</em></h1><p className="page-description">Connect the tools where work happens. Aperture imports read-only context and preserves threads, attachments, authors, folders, links, and versions.</p></div><div className="page-heading-meta">1,000+ toolkits<br/>Zero mutation tools</div></div>
 
     {!data?.enabled && <div className="notice"><strong>Integrations are ready, but not enabled.</strong> Add <code>COMPOSIO_API_KEY</code> to <code>.env</code> and restart the web service. The rest of the product remains fully available.</div>}
     {error && <div className="notice">{error}</div>}
@@ -107,17 +105,17 @@ export function IntegrationsCatalog() {
       <div className="section-head"><div className="section-title">Connected sources</div><span className="pill lime"><ShieldCheck size={10}/> Read only</span></div>
       <div className="card list">
         {data.connections.map((item) => <div className="list-row" key={item.id}>
-          <div className="list-icon"><Cloud size={15}/></div>
+          <div className="list-icon"><Cloud size={15} weight="thin"/></div>
           <div className="list-main"><div className="list-title">{item.name}</div><div className="list-meta">{item.status} · {item.lastSyncedAt ? `synced ${timeAgo(item.lastSyncedAt)}` : "awaiting first sync"}</div></div>
           <span className={`pill ${item.status === "active" ? "lime" : "orange"}`}>{item.status}</span>
-          <button className="button ghost" disabled={sync.isPending} onClick={() => sync.mutate(item.id)}><RefreshCw size={12} className={sync.isPending && sync.variables === item.id ? "spin" : ""}/>Sync</button>
-          <button className="button ghost icon-button" aria-label={`Disconnect ${item.name}`} onClick={() => disconnect.mutate(item.id)}><Unplug size={13}/></button>
+          <button className="button ghost" disabled={sync.isPending} onClick={() => sync.mutate(item.id)}><ArrowClockwise size={12} className={sync.isPending && sync.variables === item.id ? "spin" : ""}/>Sync</button>
+          <button className="button ghost icon-button" aria-label={`Disconnect ${item.name}`} onClick={() => disconnect.mutate(item.id)}><PlugsConnected size={13}/></button>
         </div>)}
       </div>
     </>}
 
     <div className="section-head"><div className="section-title">Source catalog</div><span className="pill">Powered by Composio</span></div>
-    <div className="command" style={{minHeight:54,marginTop:0}}><Search size={16}/><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search more than 1,000 supported toolkits…"/></div>
+    <div className="command integration-search"><MagnifyingGlass size={17} weight="thin"/><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search more than 1,000 supported toolkits…"/></div>
     {isLoading ? <div className="integration-grid">{[1,2,3,4,5,6].map((item) => <div className="card integration" key={item}><div className="skeleton" style={{width:38,height:38}}/><div className="skeleton" style={{height:11,width:"46%",marginTop:14}}/><div className="skeleton" style={{height:8,width:"88%",marginTop:15}}/></div>)}</div>
     : filtered.length ? <div ref={catalogViewport} style={{height:"min(68vh, 860px)",overflow:"auto",marginTop:20,contain:"strict"}}>
       <div style={{height:virtualizer.getTotalSize(),position:"relative"}}>
@@ -126,20 +124,20 @@ export function IntegrationsCatalog() {
             const connection = connected.get(item.slug.toLowerCase());
             return <article className="card card-hover integration" key={item.slug}>
               <div className="integration-head">
-                {item.logo ? <img className="integration-logo" src={item.logo} alt="" loading="lazy" referrerPolicy="no-referrer"/> : <div className="integration-logo" style={{display:"grid",placeItems:"center",color:"#16191e"}}><Link2 size={18}/></div>}
+                {item.logo ? <img className="integration-logo" src={item.logo} alt="" loading="lazy" referrerPolicy="no-referrer"/> : <div className="integration-logo" style={{display:"grid",placeItems:"center",color:"#16191e"}}><Link size={18}/></div>}
                 <div><div style={{fontSize:13,fontWeight:620}}>{item.name}</div><div style={{fontSize:9,color:"var(--faint)",marginTop:3}}>{item.toolsCount ? `${item.toolsCount} tools` : "Optimized profile"}</div></div>
               </div>
               <p className="integration-description">{item.description || "Connect this source for read-only search and research context."}</p>
               <div className="integration-foot">
                 {item.optimized ? <span className="pill lime"><Check size={9}/> Optimized</span> : <span className="pill">Adaptive</span>}
                 {connection ? <span className="pill lime">Connected</span> : <button className="button secondary" disabled={!data?.enabled || connect.isPending} onClick={() => connect.mutate(item.slug)}>
-                  {connect.isPending && connect.variables === item.slug ? <LoaderCircle size={12} className="spin"/> : <ArrowUpRight size={12}/>} Connect
+                  {connect.isPending && connect.variables === item.slug ? <SpinnerGap size={12} className="spin"/> : <ArrowUpRight size={12}/>} Connect
                 </button>}
               </div>
             </article>;
           })}</div>
         </div>)}
       </div>
-    </div> : <div className="card empty"><div><div className="empty-icon"><Search size={18}/></div><strong>No matching toolkit</strong><span>Try a broader source or category.</span></div></div>}
+    </div> : <div className="card empty"><div><div className="empty-icon"><MagnifyingGlass size={18}/></div><strong>No matching toolkit</strong><span>Try a broader source or category.</span></div></div>}
   </div>;
 }

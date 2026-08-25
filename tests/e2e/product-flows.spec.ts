@@ -45,7 +45,7 @@ test("streams a grounded research answer and supports cancellation controls", as
     await route.fulfill({ body: chunks, headers: { "content-type": "text/event-stream", "x-vercel-ai-ui-message-stream": "v1" } });
   });
   await page.goto("/research");
-  await page.getByPlaceholder("Ask a question across your company…").fill("When do we launch?");
+  await page.getByPlaceholder("Ask a follow-up…").fill("When do we launch?");
   await page.getByLabel("Send").click();
   await expect(page.getByText(/launch remains Friday/)).toBeVisible();
   await expect(page).toHaveURL(/conversation=/);
@@ -109,5 +109,5 @@ test("renders document evidence and relationship graph responsively", async ({ p
   await page.goto("/graph");
   await expect(page.getByText("Launch decision")).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
-  await expect(page.getByRole("heading", { name: "Knowledge graph" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "See how the company connects." })).toBeVisible();
 });

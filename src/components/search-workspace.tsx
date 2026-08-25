@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { ArrowRight, Bot, Clock3, FileText, Search, SlidersHorizontal, Sparkles } from "lucide-react";
+import { ArrowRight, Clock, FileText, MagnifyingGlass, Robot, SlidersHorizontal, Sparkle } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Fragment, useEffect, useRef, useState, type FormEvent } from "react";
@@ -72,12 +72,11 @@ export function SearchWorkspace() {
     if (!next) return;
     setQuery(next); router.replace(`/search?q=${encodeURIComponent(next)}`);
   }
-  return <div className="page">
-    <div className="eyebrow">Universal search</div>
-    <h1 className="page-title" style={{fontSize:32}}>Find the exact context.</h1>
-    <form className="command" onSubmit={submit} style={{marginTop:20,minHeight:64}}>
-      <Search size={18} color="var(--muted)"/><input value={input} onChange={(event)=>setInput(event.target.value)} placeholder="Search the company brain…" autoFocus/>
-      <button className="button secondary" type="button" onClick={()=>setMode(mode === "hybrid" ? "lexical" : "hybrid")}><Sparkles size={13}/>{mode === "hybrid" ? "Hybrid" : "Keyword"}</button>
+  return <div className="page search-page">
+    <div className="page-heading"><div><div className="eyebrow">Universal search · progressive</div><h1 className="page-title">Find the exact <em>context.</em></h1></div><div className="page-heading-meta">Lexical first<br/>Semantic upgrade</div></div>
+    <form className="command search-command" onSubmit={submit}>
+      <MagnifyingGlass size={20} weight="thin"/><input value={input} onChange={(event)=>setInput(event.target.value)} placeholder="Search the company brain…" autoFocus/>
+      <button className="button secondary" type="button" onClick={()=>setMode(mode === "hybrid" ? "lexical" : "hybrid")}><Sparkle size={13}/>{mode === "hybrid" ? "Hybrid" : "Keyword"}</button>
     </form>
     <div className="search-layout">
       <aside className="filters">
@@ -90,16 +89,16 @@ export function SearchWorkspace() {
       <section>
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",height:30,marginBottom:10}}>
           <span style={{color:"var(--muted)",fontSize:11}}>{query ? `${data?.hits.length ?? 0} results${data ? ` in ${data.tookMs} ms` : ""}${mode === "hybrid" && hybrid.isFetching && lexical.data ? " · improving ranking…" : ""}` : "Start typing to search"}</span>
-          {query && <Link href={`/research?q=${encodeURIComponent(query)}`} className="pill lime"><Bot size={10}/>Research this</Link>}
+          {query && <Link href={`/research?q=${encodeURIComponent(query)}`} className="text-link"><Robot size={13} weight="thin"/>Research this</Link>}
         </div>
-        {isFetching && !data ? [1,2,3,4].map(i=><div className="card result" key={i}><div className="skeleton" style={{height:12,width:"42%"}}/><div className="skeleton" style={{height:9,width:"90%",marginTop:15}}/><div className="skeleton" style={{height:9,width:"68%",marginTop:8}}/></div>)
-        : error ? <div className="card empty"><div><div className="empty-icon"><Search size={18}/></div><strong>Search is unavailable</strong><span>{error.message}</span></div></div>
-        : !query ? <div className="card empty"><div><div className="empty-icon"><Search size={18}/></div><strong>Everything is within reach</strong><span>Try a person, project, decision, or exact phrase.</span></div></div>
-        : hits.length ? <div className="results-viewport" ref={resultsRef}><div style={{height:virtualizer.getTotalSize(),position:"relative"}}>{virtualizer.getVirtualItems().map((row)=>{const hit=hits[row.index]!;return <div key={hit.id} data-index={row.index} ref={virtualizer.measureElement} className="virtual-result" style={{transform:`translateY(${row.start}px)`}}><Link href={`/documents/${hit.documentId}`} className="card card-hover result">
-          <div className="result-head"><div className="list-icon"><FileText size={15}/></div><div style={{minWidth:0,flex:1}}><h3>{hit.title}</h3><div className="list-meta">{hit.sourceName} · {hit.kind}</div></div><div className="pill">{provisionalRanking?"Keyword":`${Math.max(0,Math.min(100,Math.round(hit.score*100)))}%`}</div></div>
+        {isFetching && !data ? [1,2,3,4].map(i=><div className="result" key={i}><div className="skeleton" style={{height:12,width:"42%"}}/><div className="skeleton" style={{height:9,width:"90%",marginTop:15}}/><div className="skeleton" style={{height:9,width:"68%",marginTop:8}}/></div>)
+        : error ? <div className="empty"><div><div className="empty-icon"><MagnifyingGlass size={18}/></div><strong>Search is unavailable</strong><span>{error.message}</span></div></div>
+        : !query ? <div className="empty"><div><div className="empty-icon"><MagnifyingGlass size={18}/></div><strong>Everything is within reach</strong><span>Try a person, project, decision, or exact phrase.</span></div></div>
+        : hits.length ? <div className="results-viewport" ref={resultsRef}><div style={{height:virtualizer.getTotalSize(),position:"relative"}}>{virtualizer.getVirtualItems().map((row)=>{const hit=hits[row.index]!;return <div key={hit.id} data-index={row.index} ref={virtualizer.measureElement} className="virtual-result" style={{transform:`translateY(${row.start}px)`}}><Link href={`/documents/${hit.documentId}`} className="result">
+          <div className="result-head"><span className="result-index">{String(row.index + 1).padStart(2,"0")}</span><div className="list-icon"><FileText size={15} weight="thin"/></div><div style={{minWidth:0,flex:1}}><h3>{hit.title}</h3><div className="list-meta">{hit.sourceName} · {hit.kind}</div></div><div className="pill">{provisionalRanking?"Keyword":`${Math.max(0,Math.min(100,Math.round(hit.score*100)))}%`}</div></div>
           <p><HighlightedSnippet value={hit.snippet}/></p>
-          <div className="result-foot"><Clock3 size={11}/>{hit.updatedAt ? timeAgo(hit.updatedAt) : "Unknown date"}<span>·</span><span>{hit.authors.join(", ") || "Company knowledge"}</span><ArrowRight size={11} style={{marginLeft:"auto"}}/></div>
-        </Link></div>})}</div></div> : <div className="card empty"><div><div className="empty-icon"><Search size={18}/></div><strong>No matching context</strong><span>Try fewer words, a related term, or connect another source.</span></div></div>}
+          <div className="result-foot"><Clock size={11}/>{hit.updatedAt ? timeAgo(hit.updatedAt) : "Unknown date"}<span>·</span><span>{hit.authors.join(", ") || "Company knowledge"}</span><ArrowRight size={11} style={{marginLeft:"auto"}}/></div>
+        </Link></div>})}</div></div> : <div className="empty"><div><div className="empty-icon"><MagnifyingGlass size={18}/></div><strong>No matching context</strong><span>Try fewer words, a related term, or connect another source.</span></div></div>}
       </section>
     </div>
   </div>;

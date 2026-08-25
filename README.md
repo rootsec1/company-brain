@@ -1,49 +1,54 @@
 <div align="center">
-  <img src="public/aperture-mark.svg" width="76" alt="Aperture mark" />
+  <p><code>OPEN SOURCE · AGENT-NATIVE · EVIDENCE-FIRST</code></p>
   <h1>Aperture</h1>
-  <p><strong>Your company, understood.</strong></p>
-  <p>An ultra-fast, agent-native context layer for company knowledge.</p>
+  <p><strong>Ask the company. See the evidence.</strong></p>
+  <p>The fast, relationship-aware context layer for people and agents.</p>
 
   [![CI](https://github.com/rootsec1/company-brain/actions/workflows/ci.yml/badge.svg)](https://github.com/rootsec1/company-brain/actions/workflows/ci.yml)
-  [![GitHub stars](https://img.shields.io/github/stars/rootsec1/company-brain?style=flat&color=c7f36b)](https://github.com/rootsec1/company-brain/stargazers)
-  [![Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-c7f36b.svg)](LICENSE)
+  [![GitHub stars](https://img.shields.io/github/stars/rootsec1/company-brain?style=flat&color=ef856f)](https://github.com/rootsec1/company-brain/stargazers)
+  [![Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-ef856f.svg)](LICENSE)
   [![Bun](https://img.shields.io/badge/Bun-1.4+-f2f0e9.svg)](https://bun.sh)
   [![Next.js](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org)
-  [![MCP](https://img.shields.io/badge/MCP-read--only-79c8ff.svg)](https://modelcontextprotocol.io)
+  [![MCP](https://img.shields.io/badge/MCP-read--only-8a83df.svg)](https://modelcontextprotocol.io)
 </div>
 
 <br />
 
 ![Aperture company intelligence workspace](docs/assets/aperture-home.jpg)
 
-Aperture turns documents, Slack threads, connected apps, attachments, and source relationships into one searchable evidence system. People get instant search and cited research. Agents get six bounded read-only tools over MCP. PostgreSQL remains canonical while Typesense and LightRAG provide fast and graph-aware retrieval.
+Aperture turns documents, messages, connected apps, attachments, and the relationships between them into one searchable evidence system. Search paints immediately. Research answers stay attached to their sources. Agents get the same bounded, read-only context through MCP.
+
+The interface is built as a **split lens**: a warm, readable answer surface beside a live evidence map. Exact source relationships remain visible; semantic graph context enriches the answer without replacing provenance.
 
 > **Pre-1.0:** Aperture is built for a single trusted workspace and intentionally has no application login yet. The default Compose deployment binds only to localhost.
 
 ## Why Aperture
 
-Most RAG stacks flatten a company into anonymous chunks. Aperture preserves the shape of the work: who said it, which thread it belongs to, what was attached, which version replaced it, and where the claim came from.
+Most RAG stacks flatten a company into anonymous chunks. Aperture preserves the shape of the work: who said it, which thread it belongs to, what was attached, which version replaced it, and exactly where a claim came from.
 
-| | Aperture |
+| Principle | What Aperture does |
 |---|---|
-| Search | Typo-tolerant lexical paint first, then vector fusion and bounded reranking |
-| Evidence | Stable document and chunk citations for every company-specific claim |
-| Relationships | Exact source edges in PostgreSQL plus asynchronous semantic graph context |
-| Integrations | Dynamic Composio catalog, optimized profiles, cursors, triggers, and attachment hydration |
-| Agents | AI SDK `ToolLoopAgent`, six read-only tools, six-step and cost ceilings |
-| Artifacts | Scheduled research can generate versioned Markdown and JSON evidence packages |
-| Deployment | One `docker compose up --build`, three environment variables at most |
+| **Fast by default** | Typo-tolerant lexical results paint first; vector fusion and bounded reranking upgrade progressively |
+| **Evidence over vibes** | Company-specific claims resolve to stable document and chunk citations |
+| **Relationships first** | Threads, attachments, authors, folders, links, mentions, and versions are preserved before semantic enrichment |
+| **Graph when it helps** | Exact PostgreSQL edges combine with asynchronous LightRAG context; graph work never blocks search |
+| **Agent-native** | Six bounded read-only tools power the product agent and the Streamable HTTP MCP server |
+| **Bring the work in** | A dynamic Composio catalog, optimized source profiles, cursors, triggers, and attachment hydration |
+| **One-command local stack** | `docker compose up --build`, with three environment variables at most |
 
 ## Product tour
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/assets/aperture-research.jpg" alt="Cited research workspace" /><br /><sub><b>Research.</b> A focused conversation, live tool activity, and inspectable evidence.</sub></td>
-    <td width="50%"><img src="docs/assets/aperture-graph.jpg" alt="Company relationship graph" /><br /><sub><b>Graph.</b> Source-derived and semantic relationships stay visibly distinct.</sub></td>
+    <td colspan="2"><img src="docs/assets/aperture-research.jpg" alt="Aperture split-lens cited research workspace" /><br /><sub><b>Research is a split lens.</b> Read the grounded answer on a calm paper surface while verified source cards remain open beside it.</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/assets/aperture-search.jpg" alt="Progressive hybrid search" /><br /><sub><b>Search.</b> Keyboard-first results with facets, snippets, and progressive ranking.</sub></td>
-    <td width="50%"><img src="docs/assets/aperture-workflows.jpg" alt="Scheduled agent workflows" /><br /><sub><b>Workflows.</b> Describe a recurring research job in plain language and download its artifact.</sub></td>
+    <td width="50%"><img src="docs/assets/aperture-search.jpg" alt="Progressive hybrid search" /><br /><sub><b>Search.</b> A keyboard-first evidence ledger with facets, highlighted snippets, and progressive ranking.</sub></td>
+    <td width="50%"><img src="docs/assets/aperture-graph.jpg" alt="Company relationship graph" /><br /><sub><b>Graph.</b> Source-derived edges and semantic signals remain visibly distinct and directly explorable.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/assets/aperture-workflows.jpg" alt="Scheduled agent workflows" /><br /><sub><b>Workflows.</b> Turn plain-language research requests into bounded recurring agents with review-first controls.</sub></td>
+    <td width="50%"><img src="docs/assets/aperture-document.jpg" alt="Evidence-rich document viewer" /><br /><sub><b>Documents.</b> Normalized Markdown, provenance, version history, and related context share one inspection surface.</sub></td>
   </tr>
 </table>
 
@@ -53,10 +58,11 @@ Most RAG stacks flatten a company into anonymous chunks. Aperture preserves the 
   <table>
     <tr>
       <td width="50%"><img src="docs/assets/aperture-integrations.jpg" alt="Connected source catalog" /><br /><sub><b>Integrations.</b> Search and connect a broad read-only catalog with sync health at a glance.</sub></td>
-      <td width="50%"><img src="docs/assets/aperture-document.jpg" alt="Evidence-rich document viewer" /><br /><sub><b>Documents.</b> Inspect normalized content, versions, source links, and related context together.</sub></td>
+      <td width="50%"><img src="docs/assets/aperture-activity.jpg" alt="System health and ingestion activity" /><br /><sub><b>Activity.</b> Follow ingestion, indexing, graph enrichment, service health, and agent usage in real time.</sub></td>
     </tr>
     <tr>
-      <td colspan="2"><img src="docs/assets/aperture-activity.jpg" alt="System health and ingestion activity" /><br /><sub><b>Activity.</b> One operational view for ingestion progress, service health, research usage, and retries.</sub></td>
+      <td width="50%"><img src="docs/assets/aperture-mobile-home.jpg" alt="Aperture mobile overview" /><br /><sub><b>Responsive overview.</b> The primary context and ingestion path stay focused on a narrow screen.</sub></td>
+      <td width="50%"><img src="docs/assets/aperture-mobile-search.jpg" alt="Aperture mobile search" /><br /><sub><b>Responsive search.</b> Evidence remains scannable and keyboard-ready without collapsing into generic cards.</sub></td>
     </tr>
   </table>
 </details>

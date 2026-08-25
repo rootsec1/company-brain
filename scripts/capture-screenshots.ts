@@ -163,9 +163,10 @@ async function capture(page: Page, name: string, path: string, options: { fullPa
 await mkdir(outputDirectory, { recursive: true });
 const browser = await chromium.launch();
 try {
-  const desktop = await browser.newPage({ viewport: { width: 1440, height: 960 }, deviceScaleFactor: 1 });
+  const desktop = await browser.newPage({ viewport: { width: 1440, height: 1024 }, deviceScaleFactor: 1 });
   const errors: string[] = [];
   desktop.on("pageerror", (error) => errors.push(error.message));
+  desktop.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
   if (useDemoData) await installDemoData(desktop);
   await capture(desktop, "aperture-home", "/");
   await capture(desktop, "aperture-search", "/search?q=Helios");
@@ -189,6 +190,7 @@ try {
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
   mobile.on("pageerror", (error) => errors.push(error.message));
+  mobile.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
   if (useDemoData) await installDemoData(mobile);
   await capture(mobile, "aperture-mobile-home", "/", { fullPage: false });
   await capture(mobile, "aperture-mobile-search", "/search?q=Helios", { fullPage: false });

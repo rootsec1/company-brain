@@ -3,7 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import { useQuery } from "@tanstack/react-query";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import { ArrowUp, BookOpen, Bot, FileText, Search, Sparkles, Square, WandSparkles } from "lucide-react";
+import { ArrowUp, BookOpenText, FileText, MagicWand, MagnifyingGlass, Robot, Sparkle, Stop } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
@@ -21,7 +21,7 @@ function ToolPart({ part }: { part: UIMessage["parts"][number] }) {
   if (!String(value.type).startsWith("tool-") && value.type !== "dynamic-tool") return null;
   const name = String(value.toolName ?? String(value.type).replace("tool-", "")).replaceAll("_", " ");
   const state = String(value.state ?? "working");
-  return <div className="tool-event"><Sparkles size={11} style={{display:"inline",marginRight:7,color:"var(--lime)"}}/>{state.includes("output") ? "Used" : "Using"} {name}</div>;
+  return <div className={`tool-event ${state.includes("output") ? "complete" : "active"}`}><span className="tool-dot"/><Sparkle size={11} weight="thin"/>{state.includes("output") ? "Used" : "Using"} {name}</div>;
 }
 
 type ConversationSummary = { id: string; title: string; updatedAt: string };
@@ -44,7 +44,7 @@ export function ResearchWorkspace({ conversationId, resume }: { conversationId: 
   useEffect(() => {
     if (initial && !sentInitial.current) { sentInitial.current = true; router.replace(`/research?conversation=${conversationId}`); void sendMessage({ text: initial }); }
   }, [conversationId, initial, router, sendMessage]);
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
+  useEffect(() => { if (running) bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, running]);
 
   function submit(event: FormEvent) {
     event.preventDefault();
@@ -65,17 +65,19 @@ export function ResearchWorkspace({ conversationId, resume }: { conversationId: 
     "Summarize the strongest evidence and any contradictions"
   ];
 
-  return <div className="research-shell">
-    <section className="conversation">
+  return <div className={`research-shell ${running ? "is-running" : ""}`}>
+    <section className="conversation research-paper">
+      <div className="research-paper-meta"><span>Research / {messages.length ? "Project context" : "New investigation"}</span><span>{running ? "Agent active" : messages.length ? `${uniqueEvidence.length} verified sources` : "Ready"}</span></div>
       <div className="messages">
-        {!messages.length && <div style={{maxWidth:760,margin:"12vh auto 0"}}>
-          <div className="empty-icon" style={{width:52,height:52,borderRadius:16}}><WandSparkles size={22}/></div>
-          <h1 style={{textAlign:"center",fontSize:30,letterSpacing:"-.045em",margin:"15px 0 8px"}}>Research with the whole company in context.</h1>
-          <p style={{textAlign:"center",color:"var(--muted)",fontSize:13,lineHeight:1.6,maxWidth:570,margin:"auto"}}>Aperture searches, follows relationships, and reads the underlying evidence before it answers.</p>
-          <div style={{display:"grid",gap:8,maxWidth:560,margin:"28px auto"}}>{suggestions.map(suggestion=><button className="card card-hover" style={{textAlign:"left",padding:"13px 15px",color:"var(--muted)",cursor:"pointer"}} key={suggestion} onClick={()=>void sendMessage({text:suggestion})}><Sparkles size={12} style={{display:"inline",marginRight:9,color:"var(--lime)"}}/>{suggestion}</button>)}</div>
+        {!messages.length && <div className="research-empty">
+          <MagicWand size={24} weight="thin"/>
+          <div className="eyebrow">Ask with the whole company in context</div>
+          <h1>What do you need to <em>understand?</em></h1>
+          <p>Aperture searches, follows relationships, and reads the underlying evidence before it answers.</p>
+          <div className="research-suggestions">{suggestions.map((suggestion, index)=><button key={suggestion} onClick={()=>void sendMessage({text:suggestion})}><span>{String(index + 1).padStart(2,"0")}</span>{suggestion}<ArrowUp size={12}/></button>)}</div>
         </div>}
         {messages.map((message)=><article className={`message ${message.role}`} key={message.id}>
-          {message.role === "assistant" && <div className="message-role"><Bot size={11} style={{display:"inline",marginRight:6}}/>Aperture research</div>}
+          {message.role === "assistant" && <div className="message-role"><Robot size={12} weight="thin"/>Aperture research · grounded answer</div>}
           <div className={message.role === "user" ? "bubble" : "message-copy"}>
             {message.parts.map((part,index)=>part.type === "text"
               ? message.role === "assistant"
@@ -89,19 +91,21 @@ export function ResearchWorkspace({ conversationId, resume }: { conversationId: 
       </div>
       <div className="composer-wrap">
         <form className="composer" onSubmit={submit}>
-          <textarea value={input} onChange={(event)=>setInput(event.target.value)} placeholder="Ask a question across your company…" onKeyDown={(event)=>{if(event.key==="Enter"&&!event.shiftKey){event.preventDefault();event.currentTarget.form?.requestSubmit();}}}/>
-          <div className="composer-foot"><span style={{color:"var(--faint)",fontSize:10}}>Read-only · grounded in indexed evidence</span>{running ? <button type="button" className="button icon-button secondary" onClick={stop} aria-label="Stop"><Square size={13}/></button> : <button className="button icon-button" disabled={!input.trim()} aria-label="Send"><ArrowUp size={15}/></button>}</div>
+          <div className="composer-orbit"><Robot size={19} weight="thin"/></div>
+          <textarea value={input} onChange={(event)=>setInput(event.target.value)} placeholder="Ask a follow-up…" onKeyDown={(event)=>{if(event.key==="Enter"&&!event.shiftKey){event.preventDefault();event.currentTarget.form?.requestSubmit();}}}/>
+          <div className="composer-foot"><span>Scope · whole company &nbsp; / &nbsp; Depth · standard</span>{running ? <button type="button" className="button icon-button secondary" onClick={stop} aria-label="Stop"><Stop size={13}/></button> : <button className="button icon-button" disabled={!input.trim()} aria-label="Send"><ArrowUp size={15}/></button>}</div>
         </form>
       </div>
     </section>
-    <aside className="evidence-panel">
-      <div className="evidence-head"><div><div className="section-title">Evidence</div><div className="list-meta">Sources used in this research</div></div><div className="pill lime">{uniqueEvidence.length} found</div></div>
-      {uniqueEvidence.length ? uniqueEvidence.slice(0,12).map((hit,index)=><Link href={`/documents/${hit.documentId}`} className="card card-hover" style={{display:"block",padding:13,marginBottom:8}} key={hit.id}>
-        <div style={{display:"flex",gap:9}}><div className="list-icon" style={{width:29,height:29}}><FileText size={13}/></div><div style={{minWidth:0}}><div className="list-title">[{index+1}] {hit.title}</div><div className="list-meta">{hit.sourceName} · {hit.kind}</div></div></div>
-        <p style={{color:"var(--muted)",fontSize:10,lineHeight:1.55,margin:"10px 0 0"}}>{hit.content.slice(0,170)}…</p>
-      </Link>) : <div className="empty" style={{minHeight:210}}><div><div className="empty-icon"><BookOpen size={18}/></div><strong>Evidence will appear here</strong><span>Ask a question to start searching.</span></div></div>}
-      {!!recent.data?.conversations.length && <><div className="filter-label" style={{margin:"18px 0 8px"}}>Recent research</div>{recent.data.conversations.slice(0,6).map((conversation) => <Link key={conversation.id} href={`/research?conversation=${conversation.id}`} className="list-row" style={{padding:"9px 4px"}}><div className="list-main"><div className="list-title">{conversation.title}</div><div className="list-meta">{timeAgo(conversation.updatedAt)}</div></div></Link>)}</>}
-      {messages.length > 0 && <Link href={`/search?q=${encodeURIComponent(textParts(messages.findLast((message)=>message.role==="user") ?? messages[0]))}`} className="button secondary" style={{width:"100%",justifyContent:"center",marginTop:10}}><Search size={13}/>Open full search</Link>}
+    <aside className="evidence-panel evidence-map">
+      <div className="evidence-head"><div><div className="eyebrow">Evidence map</div><div className="section-title">{uniqueEvidence.length || 0} verified sources</div></div><span className="evidence-pulse">Live</span></div>
+      <div className="evidence-stack">
+        {uniqueEvidence.length ? uniqueEvidence.slice(0,12).map((hit,index)=><Link href={`/documents/${hit.documentId}`} className="evidence-card" key={hit.id}>
+          <span className="evidence-index">{index+1}</span><div className="evidence-card-copy"><div className="list-title">{hit.title}</div><div className="list-meta">{hit.sourceName} · {hit.kind}</div><p>{hit.content.slice(0,170)}…</p><span className="evidence-open">View source <ArrowUp size={10}/></span></div>
+        </Link>) : <div className="evidence-empty"><BookOpenText size={24} weight="thin"/><strong>Evidence will map here</strong><span>Ask a question to trace claims back to their sources.</span></div>}
+      </div>
+      {!!recent.data?.conversations.length && <div className="recent-research"><div className="filter-label">Recent investigations</div>{recent.data.conversations.slice(0,4).map((conversation) => <Link key={conversation.id} href={`/research?conversation=${conversation.id}`}><span>{conversation.title}</span><small>{timeAgo(conversation.updatedAt)}</small></Link>)}</div>}
+      {messages.length > 0 && <Link href={`/search?q=${encodeURIComponent(textParts(messages.findLast((message)=>message.role==="user") ?? messages[0]))}`} className="text-link evidence-search"><MagnifyingGlass size={13}/>Open full search</Link>}
     </aside>
   </div>;
 }

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Aperture system architecture</title>
+  <desc id="desc">Sources flow through deterministic ingestion into canonical PostgreSQL and object storage, then into fast search and asynchronous semantic graph projections used by the research agent and product.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#090b0e"/><stop offset="1" stop-color="#11161a"/></linearGradient>
+    <radialGradient id="glowA"><stop stop-color="#c7f36b" stop-opacity=".17"/><stop offset="1" stop-color="#c7f36b" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glowB"><stop stop-color="#79c8ff" stop-opacity=".14"/><stop offset="1" stop-color="#79c8ff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="canonical" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8ff80"/><stop offset="1" stop-color="#91ce39"/></linearGradient>
+    <linearGradient id="agent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#88d1ff"/><stop offset="1" stop-color="#508edb"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000" flood-opacity=".34"/></filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="45"/></filter>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 9 4.5 0 9z" fill="#6d7783"/></marker>
+    <marker id="arrowLime" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 9 4.5 0 9z" fill="#b9e65e"/></marker>
+    <style>
+      .title{fill:#f2f0e9;font:650 38px Inter,Arial,sans-serif;letter-spacing:-1.5px}.sub{fill:#8f98a5;font:16px Inter,Arial,sans-serif}.kicker{fill:#c7f36b;font:700 12px Inter,Arial,sans-serif;letter-spacing:2px}.lane{fill:#11151a;stroke:#252b33;stroke-width:1.2}.laneTitle{fill:#f2f0e9;font:650 17px Inter,Arial,sans-serif}.laneSub{fill:#737d89;font:12px Inter,Arial,sans-serif}.card{fill:#171c22;stroke:#303842;stroke-width:1}.cardTitle{fill:#edf0eb;font:620 15px Inter,Arial,sans-serif}.cardSub{fill:#8c96a2;font:12px Inter,Arial,sans-serif}.tiny{fill:#69737f;font:10px Inter,Arial,sans-serif;letter-spacing:.5px}.chip{fill:#20262d;stroke:#343d47}.chipText{fill:#aeb6bf;font:11px Inter,Arial,sans-serif}.line{fill:none;stroke:#5d6874;stroke-width:2;marker-end:url(#arrow)}.limeLine{fill:none;stroke:#a9d655;stroke-width:2.2;marker-end:url(#arrowLime)}.dash{stroke-dasharray:8 8}.dot{fill:#c7f36b}
+    </style>
+  </defs>
+  <rect width="1600" height="900" rx="30" fill="url(#bg)"/>
+  <circle cx="435" cy="310" r="320" fill="url(#glowA)" filter="url(#soft)"/><circle cx="1320" cy="610" r="330" fill="url(#glowB)" filter="url(#soft)"/>
+  <g transform="translate(70 58)"><text class="kicker">SYSTEM MAP · LOCAL-FIRST · READ-ONLY</text><text y="48" class="title">The context layer between company knowledge and agents</text><text y="80" class="sub">Exact source truth, low-latency retrieval, and semantic context—composed from mature open-source infrastructure.</text></g>
+  <g transform="translate(70 190)">
+    <rect class="lane" width="250" height="605" rx="22"/><text x="24" y="38" class="laneTitle">Company surfaces</text><text x="24" y="60" class="laneSub">Anything people already use</text>
+    <g transform="translate(20 92)"><rect class="card" width="210" height="76" rx="14"/><circle cx="31" cy="30" r="12" fill="#d8ff80"/><text x="55" y="29" class="cardTitle">Connected tools</text><text x="55" y="49" class="cardSub">Slack · Drive · Notion</text></g>
+    <g transform="translate(20 182)"><rect class="card" width="210" height="76" rx="14"/><circle cx="31" cy="30" r="12" fill="#79c8ff"/><text x="55" y="29" class="cardTitle">Files &amp; URLs</text><text x="55" y="49" class="cardSub">PDF · Office · images</text></g>
+    <g transform="translate(20 272)"><rect class="card" width="210" height="76" rx="14"/><circle cx="31" cy="30" r="12" fill="#ffb467"/><text x="55" y="29" class="cardTitle">Plain text</text><text x="55" y="49" class="cardSub">Messages · Markdown · logs</text></g>
+    <g transform="translate(20 384)"><rect width="210" height="152" rx="16" fill="#101318" stroke="#262d35"/><text x="18" y="28" class="tiny">PRESERVED AT INGEST</text><g transform="translate(16 44)"><rect class="chip" width="83" height="28" rx="14"/><text x="15" y="18" class="chipText">threads</text><rect x="91" class="chip" width="103" height="28" rx="14"/><text x="105" y="18" class="chipText">attachments</text><rect y="38" class="chip" width="88" height="28" rx="14"/><text x="16" y="56" class="chipText">authors</text><rect x="96" y="38" class="chip" width="98" height="28" rx="14"/><text x="111" y="56" class="chipText">versions</text><rect y="76" class="chip" width="194" height="28" rx="14"/><text x="29" y="94" class="chipText">links · mentions · folders</text></g></g>
+  </g>
+  <path class="limeLine" d="M320 495 H365"/>
+  <g transform="translate(365 190)">
+    <rect class="lane" width="315" height="605" rx="22"/><text x="24" y="38" class="laneTitle">Deterministic ingestion</text><text x="24" y="60" class="laneSub">Idempotent, bounded, retryable</text>
+    <g transform="translate(22 92)" filter="url(#shadow)"><rect width="271" height="96" rx="16" fill="#182018" stroke="#50672c"/><text x="20" y="32" class="cardTitle">Normalize</text><text x="20" y="56" class="cardSub">Reducto SDK or direct Markdown</text><text x="20" y="76" class="tiny">SHA-256 DEDUPLICATION</text></g>
+    <path class="limeLine" d="M158 188 V222"/>
+    <g transform="translate(22 222)"><rect class="card" width="271" height="95" rx="16"/><text x="20" y="31" class="cardTitle">Version + relate</text><text x="20" y="55" class="cardSub">Immutable objects and typed edges</text><text x="20" y="76" class="tiny">POSTGRES TRANSACTION</text></g>
+    <path class="limeLine" d="M158 317 V351"/>
+    <g transform="translate(22 351)"><rect class="card" width="271" height="95" rx="16"/><text x="20" y="31" class="cardTitle">Chunk + embed</text><text x="20" y="55" class="cardSub">Overlapping Markdown segments</text><text x="20" y="76" class="tiny">OPENROUTER · 1,024D</text></g>
+    <g transform="translate(22 476)"><rect width="271" height="74" rx="15" fill="#11161a" stroke="#2d353e"/><circle class="dot" cx="23" cy="27" r="4"/><text x="38" y="31" class="cardSub">BullMQ crash recovery</text><text x="20" y="54" class="tiny">PROGRESS · BACKOFF · DEDUPE</text></g>
+  </g>
+  <path class="line" d="M680 392 H730"/><path class="line" d="M680 495 H730"/><path class="line dash" d="M680 620 H730"/>
+  <g transform="translate(730 190)">
+    <rect class="lane" width="370" height="605" rx="22"/><text x="24" y="38" class="laneTitle">Truth + projections</text><text x="24" y="60" class="laneSub">Canonical first; derived stores rebuildable</text>
+    <g transform="translate(22 92)" filter="url(#shadow)"><rect width="326" height="126" rx="18" fill="url(#canonical)"/><text x="22" y="38" style="fill:#11160c;font:700 18px Inter,Arial">PostgreSQL</text><text x="22" y="64" style="fill:#253314;font:12px Inter,Arial">documents · versions · chunks · edges</text><text x="22" y="85" style="fill:#253314;font:12px Inter,Arial">jobs · runs · citations · cursors</text><rect x="22" y="98" width="130" height="18" rx="9" fill="#11160c" opacity=".14"/><text x="37" y="111" style="fill:#17210e;font:700 9px Inter,Arial;letter-spacing:1px">CANONICAL TRUTH</text></g>
+    <g transform="translate(22 246)"><rect class="card" width="156" height="102" rx="16"/><text x="18" y="33" class="cardTitle">SeaweedFS</text><text x="18" y="57" class="cardSub">Raw objects</text><text x="18" y="77" class="cardSub">Normalized MD</text></g>
+    <g transform="translate(192 246)"><rect class="card" width="156" height="102" rx="16"/><text x="18" y="33" class="cardTitle">Typesense</text><text x="18" y="57" class="cardSub">Lexical + HNSW</text><text x="18" y="77" class="cardSub">Facets + filters</text></g>
+    <g transform="translate(22 378)"><rect width="326" height="116" rx="17" fill="#171826" stroke="#48436b"/><text x="20" y="34" class="cardTitle">LightRAG</text><text x="20" y="58" class="cardSub">Semantic entities + relations</text><text x="20" y="80" class="cardSub">PostgreSQL-backed graph storage</text><text x="20" y="100" style="fill:#9e90ff;font:700 9px Inter,Arial;letter-spacing:1px">ASYNCHRONOUS · DEGRADABLE</text></g>
+    <g transform="translate(22 520)"><rect width="326" height="42" rx="12" fill="#101419" stroke="#2b333b"/><text x="20" y="26" class="tiny">VALKEY · QUEUES + SHORT-LIVED CACHE</text></g>
+  </g>
+  <path class="limeLine" d="M1100 350 H1150"/><path class="line dash" d="M1100 600 H1150"/>
+  <g transform="translate(1150 190)">
+    <rect class="lane" width="380" height="605" rx="22"/><text x="24" y="38" class="laneTitle">Agent-native serving layer</text><text x="24" y="60" class="laneSub">Fast for people, bounded for machines</text>
+    <g transform="translate(22 92)" filter="url(#shadow)"><rect width="336" height="105" rx="18" fill="url(#agent)"/><text x="22" y="36" style="fill:#08131d;font:700 18px Inter,Arial">Progressive hybrid search</text><text x="22" y="62" style="fill:#142b3d;font:12px Inter,Arial">lexical → vector fusion → top-set rerank</text><text x="22" y="84" style="fill:#17364e;font:700 9px Inter,Arial;letter-spacing:1px">FIRST USEFUL RESULT WINS</text></g>
+    <g transform="translate(22 225)"><rect class="card" width="336" height="126" rx="17"/><text x="20" y="34" class="cardTitle">ResearchAgent</text><text x="20" y="58" class="cardSub">AI SDK ToolLoopAgent · max 6 steps</text><g transform="translate(18 74)"><rect class="chip" width="77" height="27" rx="13"/><text x="32" y="18" class="chipText">search</text><rect x="84" class="chip" width="91" height="27" rx="13"/><text x="98" y="18" class="chipText">relations</text><rect x="182" class="chip" width="73" height="27" rx="13"/><text x="198" y="18" class="chipText">graph</text><rect x="262" class="chip" width="55" height="27" rx="13"/><text x="278" y="18" class="chipText">live</text></g></g>
+    <g transform="translate(22 379)"><rect class="card" width="156" height="95" rx="16"/><text x="18" y="31" class="cardTitle">Next.js UI</text><text x="18" y="55" class="cardSub">Search · Research</text><text x="18" y="75" class="cardSub">Graph · Activity</text></g>
+    <g transform="translate(192 379)"><rect class="card" width="166" height="95" rx="16"/><text x="18" y="31" class="cardTitle">MCP</text><text x="18" y="55" class="cardSub">6 read-only tools</text><text x="18" y="75" class="cardSub">Streamable HTTP</text></g>
+    <g transform="translate(22 504)"><rect width="336" height="58" rx="14" fill="#182018" stroke="#536d2c"/><circle class="dot" cx="23" cy="22" r="4"/><text x="38" y="26" class="cardSub">Every company claim maps to evidence</text><text x="20" y="45" class="tiny">CITATIONS · LIMITS · CANCELLATION</text></g>
+  </g>
+  <g transform="translate(70 842)"><circle class="dot" r="4"/><text x="13" y="4" class="tiny">SOLID = USER-CRITICAL PATH</text><line x1="190" y1="0" x2="230" stroke="#68737e" stroke-width="2" stroke-dasharray="7 7"/><text x="243" y="4" class="tiny">DASHED = ASYNCHRONOUS / DEGRADABLE</text><text x="1240" y="4" class="tiny">APERTURE · 2026</text></g>
+</svg>

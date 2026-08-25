@@ -1,0 +1,12 @@
+{
+  "data": {
+    "messages": [
+      { "ts": "1787616000.000100", "thread_ts": "1787615000.000001", "text": "Decision: launch stays on Friday after the security review.", "user": "U123", "user_name": "Maya", "channel": "C01", "channel_name": "product-launch", "permalink": "https://example.slack.com/archives/C01/p1787616000000100", "files": [{ "id": "F123", "name": "security-review.pdf", "mimetype": "application/pdf", "pretty_type": "PDF", "size": 24012, "url_private": "https://files.slack.test/F123" }] },
+      { "ts": "1787615000.000001", "text": "Launch readiness thread", "user": "U222", "user_name": "Sam", "channel": "C01", "channel_name": "product-launch", "permalink": "https://example.slack.com/archives/C01/p1787615000000001", "files": [] }
+    ],
+    "next_cursor": "cursor-slack-2"
+  },
+  "error": null,
+  "successful": true,
+  "logId": "log_slack_fixture"
+}

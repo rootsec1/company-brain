@@ -1,0 +1,9 @@
+{
+  "data": {
+    "items": [{ "id": "record-1", "name": "Customer escalation", "summary": "Customer needs an updated migration timeline.", "url": "https://source.test/record-1", "owners": [{ "name": "Maya" }], "updated_at": "2026-08-24T09:00:00Z" }],
+    "cursor": "next-generic"
+  },
+  "error": null,
+  "successful": true,
+  "logId": "log_generic_fixture"
+}

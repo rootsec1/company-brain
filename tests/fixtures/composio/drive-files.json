@@ -1,0 +1,12 @@
+{
+  "data": {
+    "files": [
+      { "id": "drive-doc-1", "name": "Launch plan", "mimeType": "application/vnd.google-apps.document", "webViewLink": "https://drive.google.test/drive-doc-1", "createdTime": "2026-08-20T08:00:00Z", "modifiedTime": "2026-08-24T10:30:00Z", "owners": [{ "displayName": "Maya", "emailAddress": "maya@example.test" }], "parents": ["drive-folder-1"], "exported_text": "# Launch plan\n\nFriday launch after security approval." },
+      { "id": "drive-folder-1", "name": "Product", "mimeType": "application/vnd.google-apps.folder", "webViewLink": "https://drive.google.test/drive-folder-1", "modifiedTime": "2026-08-24T10:00:00Z", "owners": [{ "displayName": "Sam" }], "parents": [] }
+    ],
+    "nextPageToken": null
+  },
+  "error": null,
+  "successful": true,
+  "logId": "log_drive_fixture"
+}

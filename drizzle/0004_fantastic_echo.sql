@@ -1,0 +1,2 @@
+ALTER TABLE "ingestion_jobs" ADD COLUMN "sync_run_id" uuid;--> statement-breakpoint
+ALTER TABLE "ingestion_jobs" ADD CONSTRAINT "ingestion_jobs_sync_run_id_sync_runs_id_fk" FOREIGN KEY ("sync_run_id") REFERENCES "public"."sync_runs"("id") ON DELETE set null ON UPDATE no action;

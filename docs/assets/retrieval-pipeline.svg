@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="620" viewBox="0 0 1600 620" role="img" aria-labelledby="title desc">
+  <title id="title">Aperture progressive retrieval pipeline</title>
+  <desc id="desc">A timeline shows immediate lexical retrieval, parallel vector search, fusion, bounded reranking, relationship expansion, and a cited agent answer.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a0b0d"/><stop offset="1" stop-color="#12171b"/></linearGradient>
+    <linearGradient id="bar" x1="0" x2="1"><stop stop-color="#c7f36b"/><stop offset="1" stop-color="#79c8ff"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-opacity=".3"/></filter>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 9 4.5 0 9z" fill="#73808c"/></marker>
+    <style>.title{fill:#f2f0e9;font:650 34px Inter,Arial;letter-spacing:-1.3px}.sub{fill:#8f98a5;font:15px Inter,Arial}.label{fill:#edf0eb;font:620 14px Inter,Arial}.small{fill:#8d97a2;font:11px Inter,Arial}.tiny{fill:#64707b;font:700 9px Inter,Arial;letter-spacing:1px}.card{fill:#161b20;stroke:#303842}.line{stroke:#73808c;stroke-width:2;fill:none;marker-end:url(#arrow)}.ms{fill:#c7f36b;font:700 12px ui-monospace,SFMono-Regular,monospace}</style>
+  </defs>
+  <rect width="1600" height="620" rx="30" fill="url(#bg)"/>
+  <text x="70" y="76" class="title">Useful immediately. Better every millisecond.</text><text x="70" y="108" class="sub">Provider latency upgrades the result—it never holds the first paint hostage.</text>
+  <g transform="translate(70 162)">
+    <line x1="0" y1="86" x2="1450" y2="86" stroke="#293139" stroke-width="3"/><rect x="0" y="82" width="1370" height="8" rx="4" fill="url(#bar)" opacity=".72"/>
+    <g transform="translate(0)"><circle cy="86" r="12" fill="#c7f36b"/><text y="35" class="ms">0 ms</text><text y="122" class="label">Query + filters</text><text y="142" class="small">typed request</text></g>
+    <g transform="translate(220)"><circle cy="86" r="12" fill="#c7f36b"/><text y="35" class="ms">~10 ms</text><text y="122" class="label">Lexical first paint</text><text y="142" class="small">typos · facets · snippets</text></g>
+    <g transform="translate(500)"><circle cy="86" r="12" fill="#aadf65"/><text y="35" class="ms">parallel</text><text y="122" class="label">Vector candidates</text><text y="142" class="small">1,024D HNSW</text></g>
+    <g transform="translate(760)"><circle cy="86" r="12" fill="#92d68d"/><text y="35" class="ms">fusion</text><text y="122" class="label">Rank fusion</text><text y="142" class="small">lexical + semantic</text></g>
+    <g transform="translate(1010)"><circle cy="86" r="12" fill="#7bcbb7"/><text y="35" class="ms">bounded</text><text y="122" class="label">Top-set rerank</text><text y="142" class="small">deadline + fallback</text></g>
+    <g transform="translate(1290)"><circle cy="86" r="12" fill="#79c8ff"/><text y="35" class="ms">≤ 1.5 s</text><text y="122" class="label">Upgraded order</text><text y="142" class="small">streamed in place</text></g>
+  </g>
+  <g transform="translate(70 360)">
+    <rect class="card" width="280" height="150" rx="18" filter="url(#shadow)"/><text x="22" y="34" class="tiny">LOOKUP PATH</text><text x="22" y="66" class="label">Typesense only</text><text x="22" y="92" class="small">Fast facts, filenames, people,</text><text x="22" y="112" class="small">exact phrases, and filters.</text><rect x="22" y="126" width="99" height="4" rx="2" fill="#c7f36b"/>
+    <path class="line" d="M300 75 H388"/>
+    <rect x="410" class="card" width="330" height="150" rx="18" filter="url(#shadow)"/><text x="432" y="34" class="tiny">RELATIONSHIP PATH</text><text x="432" y="66" class="label">Canonical two-hop graph</text><text x="432" y="92" class="small">Threads, attachments, authors,</text><text x="432" y="112" class="small">folders, links, and versions.</text><rect x="432" y="126" width="150" height="4" rx="2" fill="#c7f36b"/>
+    <path class="line" d="M760 75 H848"/>
+    <rect x="870" class="card" width="300" height="150" rx="18" filter="url(#shadow)"/><text x="892" y="34" class="tiny">MULTI-HOP PATH</text><text x="892" y="66" class="label">LightRAG context</text><text x="892" y="92" class="small">Entities, concepts, themes,</text><text x="892" y="112" class="small">and cross-document relations.</text><rect x="892" y="126" width="126" height="4" rx="2" fill="#9586ff"/>
+    <path class="line" d="M1190 75 H1268"/>
+    <rect x="1290" width="240" height="150" rx="18" fill="#182420" stroke="#506b40" filter="url(#shadow)"/><text x="1312" y="34" class="tiny">ANSWER</text><text x="1312" y="66" class="label">Grounded synthesis</text><text x="1312" y="92" class="small">Stable chunk citations,</text><text x="1312" y="112" class="small">limits, cost, cancellation.</text><rect x="1312" y="126" width="150" height="4" rx="2" fill="url(#bar)"/>
+  </g>
+  <text x="70" y="574" class="tiny">P95 TARGETS · CACHED TYPEAHEAD &lt;100 MS · SEARCH FIRST PAINT &lt;200 MS · HYBRID UPGRADE &lt;1.5 S</text>
+</svg>

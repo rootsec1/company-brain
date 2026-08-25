@@ -1,0 +1,152 @@
+{
+  "app": {
+    "name": "Aperture",
+    "tagline": "Your company, understood.",
+    "workspaceId": "local-workspace",
+    "baseUrl": "http://localhost:3000"
+  },
+  "services": {
+    "postgresUrl": "postgres://brain:brain@postgres:5432/brain",
+    "postgresPoolMax": 20,
+    "typesenseUrl": "http://typesense:8108",
+    "typesenseApiKey": "brain-typesense-local",
+    "valkeyUrl": "redis://valkey:6379",
+    "s3Endpoint": "http://seaweedfs:8333",
+    "s3Region": "us-east-1",
+    "s3AccessKey": "brain-local",
+    "s3SecretKey": "brain-local-secret",
+    "s3Bucket": "company-brain",
+    "lightRagUrl": "http://lightrag:9621",
+    "lightRagApiKey": "brain-lightrag-local",
+    "healthCheckTimeoutMs": 4500,
+    "providerHealthCacheMs": 300000
+  },
+  "models": {
+    "answer": "openai/gpt-5.4",
+    "fast": "anthropic/claude-haiku-4.5",
+    "embedding": "qwen/qwen3-embedding-8b",
+    "embeddingDimensions": 1024,
+    "reranker": "qwen/qwen3-reranker-8b",
+    "requestTimeoutMs": 45000
+  },
+  "ingestion": {
+    "chunkSize": 1100,
+    "chunkOverlap": 160,
+    "embeddingBatchSize": 32,
+    "workerConcurrency": 16,
+    "indexConcurrency": 4,
+    "parseTimeoutMs": 600000,
+    "resultDownloadTimeoutMs": 30000,
+    "maxFileBytes": 104857600,
+    "maxUploadBatchBytes": 262144000,
+    "maxFilesPerRequest": 20,
+    "maxTextCharacters": 5000000,
+    "maxMessageCharacters": 100000
+  },
+  "search": {
+    "lexicalLimit": 30,
+    "hybridCandidateLimit": 50,
+    "answerContextLimit": 16,
+    "semanticWeight": 0.42,
+    "relationshipDepth": 2,
+    "cacheSeconds": 45,
+    "cacheTimeoutMs": 80,
+    "uiEmbeddingTimeoutMs": 600,
+    "agentEmbeddingTimeoutMs": 5000,
+    "uiRerankTimeoutMs": 600,
+    "agentRerankTimeoutMs": 5000
+  },
+  "performance": {
+    "searchFirstPaintP95Ms": 200,
+    "cachedTypeaheadP95Ms": 100,
+    "hybridUpdateP95Ms": 1500,
+    "loadConcurrency": 32,
+    "loadRequests": 500
+  },
+  "evaluation": {
+    "baseUrls": ["http://web:3000", "http://127.0.0.1:3000"],
+    "ingestionTimeoutMs": 120000,
+    "graphMinimumImprovementPoints": 10
+  },
+  "graph": {
+    "minDocumentCharacters": 600,
+    "excludedKinds": ["person", "channel"],
+    "maxSemanticNodes": 75,
+    "popularLabels": 5,
+    "semanticDepth": 2,
+    "jobAttempts": 8,
+    "jobBackoffMs": 10000,
+    "insertTimeoutMs": 15000,
+    "deleteTimeoutMs": 15000,
+    "processingTimeoutMs": 120000,
+    "pollIntervalMs": 500,
+    "workerConcurrency": 1,
+    "queryTimeoutMs": 20000,
+    "maxContextCharacters": 30000,
+    "maxReferences": 20,
+    "maxReferenceCharacters": 1200,
+    "visualizationTimeoutMs": 5000,
+    "healthTimeoutMs": 1500
+  },
+  "agent": {
+    "maxSteps": 6,
+    "timeoutMs": 90000,
+    "maxOutputTokens": 3200,
+    "maxInputTokens": 90000,
+    "maxEstimatedCostUsd": 0.25,
+    "maxDocumentCharacters": 30000,
+    "maxToolResults": 20,
+    "maxMessages": 200,
+    "maxConversationBytes": 500000
+  },
+  "workflows": {
+    "maxActive": 20,
+    "maxRunsPerWorkflow": 100,
+    "defaultTimezone": "UTC",
+    "minimumIntervalMinutes": 15
+  },
+  "integrations": {
+    "pollingIntervalMinutes": 15,
+    "maxPagesPerRun": 10,
+    "recordsPerPage": 100,
+    "catalogLimit": 1000,
+    "catalogCacheMinutes": 60,
+    "maxAttachmentDownloadsPerRun": 25,
+    "downloadDirectory": "/tmp/aperture-composio-downloads",
+    "liveSearchConnections": 4,
+    "liveSearchResultsPerConnection": 5
+  },
+  "features": {
+    "semanticGraph": true,
+    "liveSourceSearch": true,
+    "composioIntegrations": true
+  },
+  "integrationProfiles": [
+    "slack",
+    "googledrive",
+    "notion",
+    "github",
+    "confluence",
+    "jira",
+    "linear",
+    "gmail",
+    "onedrive",
+    "sharepoint",
+    "dropbox",
+    "box"
+  ],
+  "integrationReadTools": {
+    "slack": ["SLACK_SEARCH_MESSAGES", "SLACK_FETCH_CONVERSATION_HISTORY"],
+    "googledrive": ["GOOGLEDRIVE_LIST_FILES", "GOOGLEDRIVE_LIST_CHANGES"],
+    "notion": ["NOTION_SEARCH_NOTION_PAGE", "NOTION_FETCH_DATA"],
+    "github": ["GITHUB_SEARCH_ISSUES", "GITHUB_GET_REPOS"],
+    "confluence": ["CONFLUENCE_SEARCH_CONTENT"],
+    "jira": ["JIRA_SEARCH_ISSUES"],
+    "linear": ["LINEAR_LIST_ISSUES"],
+    "gmail": ["GMAIL_SEARCH_EMAILS", "GMAIL_FETCH_EMAILS"],
+    "onedrive": ["ONEDRIVE_LIST_FILES"],
+    "sharepoint": ["SHAREPOINT_SEARCH"],
+    "dropbox": ["DROPBOX_LIST_FOLDER"],
+    "box": ["BOX_LIST_FOLDER_ITEMS"]
+  }
+}

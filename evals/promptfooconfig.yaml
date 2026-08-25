@@ -1,0 +1,27 @@
+description: Aperture retrieval quality and citation grounding
+prompts:
+  - "{{query}}"
+providers:
+  - id: file://retrieval-provider.ts
+tests:
+  - vars:
+      query: "What delayed the Atlas launch to September 21?"
+    assert:
+      - type: contains
+        value: "Atlas launch decision"
+      - type: javascript
+        value: "(() => { const hits = JSON.parse(output); return hits.length > 0 && hits.every(hit => hit.citation?.documentId && hit.citation?.chunkId && hit.citation?.title); })()"
+  - vars:
+      query: "Which security issue was fixed before Atlas approval?"
+    assert:
+      - type: contains
+        value: "Atlas security review"
+      - type: javascript
+        value: "(() => { const hits = JSON.parse(output); return hits.length > 0 && hits.length <= 10 && hits[0].score >= hits[hits.length - 1].score; })()"
+  - vars:
+      query: "What is blocking enterprise onboarding?"
+    assert:
+      - type: contains
+        value: "Customer support themes"
+      - type: javascript
+        value: "JSON.parse(output).every(hit => hit.citation?.documentId && hit.citation?.chunkId)"

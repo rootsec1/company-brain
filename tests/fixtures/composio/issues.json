@@ -1,0 +1,10 @@
+{
+  "data": {
+    "issues": [
+      { "id": 42, "node_id": "issue-node-42", "key": "PRO-42", "identifier": "LIN-42", "title": "Resolve launch blocker", "summary": "Resolve launch blocker", "body": "The final security exception needs approval.", "description": "The final security exception needs approval.", "html_url": "https://github.test/acme/repo/issues/42", "created_at": "2026-08-22T09:00:00Z", "updated_at": "2026-08-24T09:00:00Z", "user": { "login": "maya" }, "comments": [{ "body": "Approved after review.", "user": { "login": "sam" } }] }
+    ]
+  },
+  "error": null,
+  "successful": true,
+  "logId": "log_issue_fixture"
+}

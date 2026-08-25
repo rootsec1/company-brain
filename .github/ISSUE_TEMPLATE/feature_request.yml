@@ -1,0 +1,33 @@
+name: Feature request
+description: Propose a focused product or platform improvement
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What user or agent outcome is difficult today?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe observable success without prescribing implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Examples or evidence
+      description: Synthetic examples, measurements, or comparable open-source behavior are useful.
+  - type: checkboxes
+    id: invariants
+    attributes:
+      label: Architecture fit
+      options:
+        - label: This keeps external agent actions read-only.
+          required: true
+        - label: This does not require adding a new environment variable.
+          required: true

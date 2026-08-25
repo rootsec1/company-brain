@@ -1,0 +1,62 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1787621904143,
+      "tag": "0000_black_jetstream",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1787622870266,
+      "tag": "0001_nosy_nova",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1787623358928,
+      "tag": "0002_salty_deadpool",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1787623588907,
+      "tag": "0003_sharp_sheva_callister",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1787624387442,
+      "tag": "0004_fantastic_echo",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1787625360578,
+      "tag": "0005_fantastic_gwen_stacy",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1787626241119,
+      "tag": "0006_colossal_hellcat",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1787634210990,
+      "tag": "0007_ambitious_pestilence",
+      "breakpoints": true
+    }
+  ]
+}

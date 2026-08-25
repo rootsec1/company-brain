@@ -14,7 +14,7 @@
 
 <br />
 
-![Aperture company intelligence workspace](docs/assets/aperture-home.jpg)
+![Aperture company intelligence workspace](docs/assets/aperture-overview-split-lens.jpg)
 
 Aperture turns documents, messages, connected apps, attachments, and the relationships between them into one searchable evidence system. Search paints immediately. Research answers stay attached to their sources. Agents get the same bounded, read-only context through MCP.
 
@@ -40,15 +40,15 @@ Most RAG stacks flatten a company into anonymous chunks. Aperture preserves the 
 
 <table>
   <tr>
-    <td colspan="2"><img src="docs/assets/aperture-research.jpg" alt="Aperture split-lens cited research workspace" /><br /><sub><b>Research is a split lens.</b> Read the grounded answer on a calm paper surface while verified source cards remain open beside it.</sub></td>
+    <td colspan="2"><img src="docs/assets/aperture-research-evidence-map.jpg" alt="Aperture split-lens cited research workspace" /><br /><sub><b>Research is a split lens.</b> Read the grounded answer on a calm paper surface while verified source cards remain open beside it.</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/assets/aperture-search.jpg" alt="Progressive hybrid search" /><br /><sub><b>Search.</b> A keyboard-first evidence ledger with facets, highlighted snippets, and progressive ranking.</sub></td>
-    <td width="50%"><img src="docs/assets/aperture-graph.jpg" alt="Company relationship graph" /><br /><sub><b>Graph.</b> Source-derived edges and semantic signals remain visibly distinct and directly explorable.</sub></td>
+    <td width="50%"><img src="docs/assets/aperture-search-ledger.jpg" alt="Progressive hybrid search" /><br /><sub><b>Search.</b> A keyboard-first evidence ledger with facets, highlighted snippets, and progressive ranking.</sub></td>
+    <td width="50%"><img src="docs/assets/aperture-knowledge-graph.jpg" alt="Company relationship graph" /><br /><sub><b>Graph.</b> Source-derived edges and semantic signals remain visibly distinct and directly explorable.</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/assets/aperture-workflows.jpg" alt="Scheduled agent workflows" /><br /><sub><b>Workflows.</b> Turn plain-language research requests into bounded recurring agents with review-first controls.</sub></td>
-    <td width="50%"><img src="docs/assets/aperture-document.jpg" alt="Evidence-rich document viewer" /><br /><sub><b>Documents.</b> Normalized Markdown, provenance, version history, and related context share one inspection surface.</sub></td>
+    <td width="50%"><img src="docs/assets/aperture-agent-workflows.jpg" alt="Scheduled agent workflows" /><br /><sub><b>Workflows.</b> Turn plain-language research requests into bounded recurring agents with review-first controls.</sub></td>
+    <td width="50%"><img src="docs/assets/aperture-source-document.jpg" alt="Evidence-rich document viewer" /><br /><sub><b>Documents.</b> Normalized Markdown, provenance, version history, and related context share one inspection surface.</sub></td>
   </tr>
 </table>
 
@@ -57,12 +57,12 @@ Most RAG stacks flatten a company into anonymous chunks. Aperture preserves the 
   <br />
   <table>
     <tr>
-      <td width="50%"><img src="docs/assets/aperture-integrations.jpg" alt="Connected source catalog" /><br /><sub><b>Integrations.</b> Search and connect a broad read-only catalog with sync health at a glance.</sub></td>
-      <td width="50%"><img src="docs/assets/aperture-activity.jpg" alt="System health and ingestion activity" /><br /><sub><b>Activity.</b> Follow ingestion, indexing, graph enrichment, service health, and agent usage in real time.</sub></td>
+      <td width="50%"><img src="docs/assets/aperture-integrations-catalog.jpg" alt="Connected source catalog" /><br /><sub><b>Integrations.</b> Search and connect a broad read-only catalog with sync health at a glance.</sub></td>
+      <td width="50%"><img src="docs/assets/aperture-system-activity.jpg" alt="System health and ingestion activity" /><br /><sub><b>Activity.</b> Follow ingestion, indexing, graph enrichment, service health, and agent usage in real time.</sub></td>
     </tr>
     <tr>
-      <td width="50%"><img src="docs/assets/aperture-mobile-home.jpg" alt="Aperture mobile overview" /><br /><sub><b>Responsive overview.</b> The primary context and ingestion path stay focused on a narrow screen.</sub></td>
-      <td width="50%"><img src="docs/assets/aperture-mobile-search.jpg" alt="Aperture mobile search" /><br /><sub><b>Responsive search.</b> Evidence remains scannable and keyboard-ready without collapsing into generic cards.</sub></td>
+      <td width="50%"><img src="docs/assets/aperture-mobile-overview.jpg" alt="Aperture mobile overview" /><br /><sub><b>Responsive overview.</b> The primary context and ingestion path stay focused on a narrow screen.</sub></td>
+      <td width="50%"><img src="docs/assets/aperture-mobile-search-ledger.jpg" alt="Aperture mobile search" /><br /><sub><b>Responsive search.</b> Evidence remains scannable and keyboard-ready without collapsing into generic cards.</sub></td>
     </tr>
   </table>
 </details>

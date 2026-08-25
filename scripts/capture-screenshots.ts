@@ -168,13 +168,13 @@ try {
   desktop.on("pageerror", (error) => errors.push(error.message));
   desktop.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
   if (useDemoData) await installDemoData(desktop);
-  await capture(desktop, "aperture-home", "/");
-  await capture(desktop, "aperture-search", "/search?q=Helios");
-  await capture(desktop, "aperture-research", `/research?conversation=${conversationId}`);
-  await capture(desktop, "aperture-graph", "/graph");
-  await capture(desktop, "aperture-integrations", "/integrations");
-  await capture(desktop, "aperture-activity", "/activity");
-  await capture(desktop, "aperture-workflows", "/workflows", { prepare: async (page) => {
+  await capture(desktop, "aperture-overview-split-lens", "/");
+  await capture(desktop, "aperture-search-ledger", "/search?q=Helios");
+  await capture(desktop, "aperture-research-evidence-map", `/research?conversation=${conversationId}`);
+  await capture(desktop, "aperture-knowledge-graph", "/graph");
+  await capture(desktop, "aperture-integrations-catalog", "/integrations");
+  await capture(desktop, "aperture-system-activity", "/activity");
+  await capture(desktop, "aperture-agent-workflows", "/workflows", { prepare: async (page) => {
     await page.getByPlaceholder(/Every weekday/).fill("Every weekday at 9am, summarize new launch risks and contradictions");
     await page.getByRole("button", { name: "Draft workflow" }).click();
     await page.getByText("Review before creating").waitFor();
@@ -186,14 +186,14 @@ try {
     const search = await searchResponse.json() as { hits?: Array<{ documentId: string }> };
     selectedDocumentId = search.hits?.[0]?.documentId ?? documentId;
   }
-  await capture(desktop, "aperture-document", `/documents/${selectedDocumentId}`);
+  await capture(desktop, "aperture-source-document", `/documents/${selectedDocumentId}`);
 
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
   mobile.on("pageerror", (error) => errors.push(error.message));
   mobile.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
   if (useDemoData) await installDemoData(mobile);
-  await capture(mobile, "aperture-mobile-home", "/", { fullPage: false });
-  await capture(mobile, "aperture-mobile-search", "/search?q=Helios", { fullPage: false });
+  await capture(mobile, "aperture-mobile-overview", "/", { fullPage: false });
+  await capture(mobile, "aperture-mobile-search-ledger", "/search?q=Helios", { fullPage: false });
 
   if (errors.length) throw new Error(`Browser errors: ${[...new Set(errors)].join("; ")}`);
   console.info(`Saved visual audit evidence to ${outputDirectory}`);

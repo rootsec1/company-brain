@@ -4,7 +4,7 @@
 
 - Selected visual target: Option 3, “Split Lens” (`1487 × 1058` source, proportionally normalized to `1440 × 1024` for comparison).
 - Browser implementation: `/research?conversation=22222222-2222-4222-8222-222222222222` at `1440 × 1024`.
-- Final public capture: `docs/assets/aperture-research.jpg`.
+- Final public capture: `docs/assets/aperture-research-evidence-map.jpg`.
 - Full comparison evidence: `test-results/design-qa/research-full-comparison.jpg` (ignored from Git).
 - Focused comparison evidence: `test-results/design-qa/research-core-comparison.jpg` and `test-results/design-qa/research-composer-comparison.jpg` (ignored from Git).
 
